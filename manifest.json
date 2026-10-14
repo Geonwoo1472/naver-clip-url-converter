@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "네이버 클립 URL 변환기",
+  "description": "네이버 클립 URL 추출과 경기일보 WCMS의 URL 삽입을 돕습니다. 경기일보 플랫폼운영지원부 · 남건우",
+  "version": "1.0.0.0",
+  "version_name": "1.0.0.0",
+  "author": "경기일보 플랫폼운영지원부 남건우",
+  "minimum_chrome_version": "111",
+  "permissions": ["clipboardWrite", "scripting"],
+  "background": {"service_worker": "background.js"},
+  "host_permissions": [
+    "https://naver.me/*",
+    "https://link.naver.com/*",
+    "https://m.naver.com/*",
+    "https://www.naver.com/*",
+    "https://clip.naver.com/*",
+    "https://clip-viewer.naver.com/*",
+    "https://wcms.kyeonggi.com/*"
+  ],
+  "content_scripts": [{
+    "matches": ["https://wcms.kyeonggi.com/editor*"],
+    "js": ["wcms-compat-core.js", "wcms-video-bridge.js", "wcms-compat.js"],
+    "run_at": "document_idle",
+    "world": "MAIN"
+  }, {
+    "matches": ["https://wcms.kyeonggi.com/editor*"],
+    "js": ["wcms-status.js"],
+    "run_at": "document_idle",
+    "world": "ISOLATED"
+  }],
+  "action": {
+    "default_title": "네이버 클립 URL 변환기",
+    "default_popup": "popup.html",
+    "default_icon": {"16": "icons/icon16.png", "32": "icons/icon32.png"}
+  },
+  "icons": {"16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png"},
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'; connect-src https://naver.me https://link.naver.com https://m.naver.com https://www.naver.com https://clip.naver.com https://clip-viewer.naver.com"
+  }
+}

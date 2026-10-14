@@ -1,0 +1,11 @@
+{
+  "name": "naver-clip-url-converter",
+  "private": true,
+  "description": "Development test runner for the Chrome extension; extension version is 1.0.0.0.",
+  "scripts": {
+    "test": "node --test tests/*.test.cjs tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
